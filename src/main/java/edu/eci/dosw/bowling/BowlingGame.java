@@ -20,8 +20,8 @@ public class BowlingGame {
      * Lanza IllegalStateException si el juego ya termino. 
      */
     public void roll(int pins) {
-        if (pins < 0) {
-            throw new IllegalArgumentException("El numero de pinos derribados no puede ser negativo: " + pins);
+        if (pins < 0 || pins > 10) {
+            throw new IllegalArgumentException("Numero de pinos invalido: " + pins + ". Debe estar entre 0 y 10.");
         }
 
         if (frames.isEmpty()) {
