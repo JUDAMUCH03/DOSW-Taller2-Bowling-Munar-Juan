@@ -15,10 +15,16 @@ public class BowlingGame {
         this.currentFrame = 0;
     }
 
-    /** Registra pinos derribados. Lanza IllegalArgumentException si pines < 0 o > 10.
-     *  Lanza IllegalStateException si el juego ya termino. */
+    /** 
+     * Registra pinos derribados. Lanza IllegalArgumentException si pines < 0 o > 10.
+     * Lanza IllegalStateException si el juego ya termino. 
+     */
     public void roll(int pins) {
-        // TODO: implementar con TDD (RED -> GREEN -> REFACTOR)
+        if (frames.isEmpty()) {
+            Frame frame = new Frame();
+            frame.addRoll(pins);
+            frames.add(frame);
+        }
     }
 
     /** Puntaje total. Lanza IllegalStateException si el juego no esta completo. */
@@ -33,5 +39,7 @@ public class BowlingGame {
         return false;
     }
 
-    public List<Frame> getFrames() { return List.copyOf(frames); }
+    public List<Frame> getFrames() { 
+        return List.copyOf(frames); 
+    }
 }
