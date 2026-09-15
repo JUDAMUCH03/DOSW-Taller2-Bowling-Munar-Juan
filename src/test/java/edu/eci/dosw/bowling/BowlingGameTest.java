@@ -33,4 +33,18 @@ class BowlingGameTest {
             "Lanzar un tiro con pinos negativos debe arrojar IllegalArgumentException"
         );
     }
+
+    @Test
+    @DisplayName("A3: roll(11) con pines mayores a 10 debe lanzar IllegalArgumentException")
+    void rollMoreThanTenPins_throwsIllegalArgumentException() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+
+        // Act & Assert
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> game.roll(11),
+            "Un tiro no puede registrar mas de 10 pinos"
+        );
+    }
 }
