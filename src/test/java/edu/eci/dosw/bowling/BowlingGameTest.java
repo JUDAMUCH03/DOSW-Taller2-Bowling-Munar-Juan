@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BowlingGameTest {
 
@@ -17,5 +18,19 @@ class BowlingGameTest {
         assertDoesNotThrow(() -> game.roll(0));
         assertFalse(game.getFrames().isEmpty(), "Debe existir al menos un frame creado");
         assertEquals(1, game.getFrames().size(), "Debe haber exactamente 1 frame tras el primer tiro");
+    }
+
+    @Test
+    @DisplayName("A2: roll(-1) con pines negativos debe lanzar IllegalArgumentException")
+    void rollNegativePins_throwsIllegalArgumentException() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+
+        // Act & Assert
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> game.roll(-1),
+            "Lanzar un tiro con pinos negativos debe arrojar IllegalArgumentException"
+        );
     }
 }
