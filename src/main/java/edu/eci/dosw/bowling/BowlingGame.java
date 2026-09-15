@@ -20,6 +20,10 @@ public class BowlingGame {
      * Lanza IllegalStateException si el juego ya termino. 
      */
     public void roll(int pins) {
+        if (pins < 0) {
+            throw new IllegalArgumentException("El numero de pinos derribados no puede ser negativo: " + pins);
+        }
+
         if (frames.isEmpty()) {
             Frame frame = new Frame();
             frame.addRoll(pins);
@@ -29,13 +33,11 @@ public class BowlingGame {
 
     /** Puntaje total. Lanza IllegalStateException si el juego no esta completo. */
     public int score() {
-        // TODO: implementar con TDD
         return 0;
     }
 
     /** true cuando los 10 frames han sido completados. */
     public boolean isComplete() {
-        // TODO: implementar con TDD
         return false;
     }
 
