@@ -10,7 +10,11 @@ public class BowlingScorer {
         for (int i = 0; i < frames.size(); i++) {
             Frame currentFrame = frames.get(i);
 
-            if (i < 9 && currentFrame.getType() == FrameType.SPARE) {
+            if (i < 9 && currentFrame.getType() == FrameType.STRIKE) {
+                Frame nextFrame = frames.get(i + 1);
+                int bonus = nextFrame.getRolls().get(0) + nextFrame.getRolls().get(1);
+                totalScore += 10 + bonus;
+            } else if (i < 9 && currentFrame.getType() == FrameType.SPARE) {
                 int bonus = frames.get(i + 1).getRolls().get(0);
                 totalScore += 10 + bonus;
             } else {
