@@ -105,4 +105,21 @@ class BowlingGameTest {
         assertEquals(1, frames.get(0).getRolls().size(), "El frame con strike solo tiene 1 tiro");
         assertEquals(4, frames.get(1).getRolls().get(0), "El frame 2 recibe el tiro siguiente");
     }
+
+    @Test 
+    @DisplayName ("A7: roll(5) y luego roll(5) detecta spare")
+    void rollFiveAndFive_detectSpare() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+
+        //Act
+        game.roll(5);
+        game.roll(5);
+
+        //Assert
+        List<Frame> frames = game.getFrames();
+        assertEquals(1, frames.size(), "Debe haber 1 frame creado");
+        assertEquals(FrameType.SPARE, frames.get(0).getType(), "El frame debe ser SPARE");
+
+    }
 }
