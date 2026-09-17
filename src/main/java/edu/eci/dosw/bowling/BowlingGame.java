@@ -12,6 +12,7 @@ public class BowlingGame {
     private static final int MAX_FRAMES = 10;
     private final List<Frame> frames;
     private int currentFrame;
+    private final BowlingScorer scorer = new BowlingScorer();
 
     public BowlingGame() {
         this.frames = new ArrayList<>();
@@ -56,7 +57,10 @@ public class BowlingGame {
     }
 
     public int score() {
-        return 0;
+        if (!isComplete()) {
+            throw new IllegalStateException("No se puede calcular el puntaje de un juego incompleto");
+        }
+        return scorer.calculate(frames);
     }
 
     public boolean isComplete() {
