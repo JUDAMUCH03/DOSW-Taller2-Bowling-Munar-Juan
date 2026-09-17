@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class BowlingGame {
 
+    private static final int MAX_FRAMES = 10;
     private final List<Frame> frames;
     private int currentFrame;
 
@@ -18,6 +19,10 @@ public class BowlingGame {
     }
 
     public void roll(int pins) {
+        if (isComplete()) {
+            throw new IllegalStateException("El juego ya esta completo. No se permiten mas tiros.");
+        }
+
         if (pins < 0 || pins > 10) {
             throw new IllegalArgumentException("Numero de pinos invalido: " + pins + ". Debe estar entre 0 y 10.");
         }
@@ -45,7 +50,7 @@ public class BowlingGame {
     }
 
     public boolean isComplete() {
-        return false;
+        return frames.size() == MAX_FRAMES && frames.get(MAX_FRAMES - 1).isComplete();
     }
 
     public List<Frame> getFrames() { 
