@@ -148,8 +148,21 @@ class BowlingGameTest {
     @Test
     @DisplayName("C1: Juego recien iniciado no esta completo")
     void newGame_isNotComplete() {
+        // Arrange
         BowlingGame game = new BowlingGame();
-
+        //Act y Assert
         assertFalse(game.isComplete(), "Un juego sin tiros no debe estar completo");
+    }
+
+    @Test
+    @DisplayName("C2: Juego con 9 frames no esta completo")
+    void gameWithNineFrames_isNotComplete() {
+        // Arrange: 9 frames regulares (18 tiros)
+        BowlingGame game = new BowlingGame();
+        rollMany(game, 18, 4);
+
+        // Act y Assert
+        assertEquals(9, game.getFrames().size(), "Deben haberse registrado exactamente 9 frames");
+        assertFalse(game.isComplete(), "Un juego en el frame 9 no debe marcarse como completo");
     }
 }
