@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
+
 class BowlingGameTest {
 
     @Test
@@ -84,5 +86,23 @@ class BowlingGameTest {
         for (int i = 0; i < times; i++) {
             game.roll(pins);
         }
+    }
+
+    @Test
+    @DisplayName("A6: roll(10) detecta strike, marca el frame y avanza al siguiente")
+    void rollTenPins_detectsStrikeAndAdvancesFrame() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+
+        // Act: Frame 1 es Strike, siguiente tiro pertenece al Frame 2
+        game.roll(10);
+        game.roll(4);
+
+        // Assert
+        List<Frame> frames = game.getFrames();
+        assertEquals(2, frames.size(), "Debe haber 2 frames creados");
+        assertEquals(FrameType.STRIKE, frames.get(0).getType(), "El frame 1 debe ser STRIKE");
+        assertEquals(1, frames.get(0).getRolls().size(), "El frame con strike solo tiene 1 tiro");
+        assertEquals(4, frames.get(1).getRolls().get(0), "El frame 2 recibe el tiro siguiente");
     }
 }
