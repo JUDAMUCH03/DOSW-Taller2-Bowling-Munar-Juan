@@ -144,4 +144,12 @@ class BowlingGameTest {
         assertEquals(3, tenthFrame.getRolls().size(), "El frame 10 debe almacenar los 3 tiros de bonificacion");
         assertEquals(FrameType.TENTH, tenthFrame.getType(), "El ultimo frame debe identificarse como TENTH");
     }
+
+    @Test
+    @DisplayName("C1: Juego recien iniciado no esta completo")
+    void newGame_isNotComplete() {
+        BowlingGame game = new BowlingGame();
+
+        assertFalse(game.isComplete(), "Un juego sin tiros no debe estar completo");
+    }
 }
