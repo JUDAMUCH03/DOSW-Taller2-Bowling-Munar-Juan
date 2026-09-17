@@ -1,3 +1,4 @@
+package edu.eci.dosw.bowling;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -45,6 +46,21 @@ class BowlingGameTest {
             IllegalArgumentException.class,
             () -> game.roll(11),
             "Un tiro no puede registrar mas de 10 pinos"
+        );
+    }
+
+    @Test
+    @DisplayName("A4: Dos tiros en un frame suman > 10 lanza IllegalArgumentException")
+    void twoRollsInSameFrameExceedingTenPins_throwsIllegalArgumentException() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+        game.roll(7);
+
+        // Act & Assert
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> game.roll(6),
+            "La suma de dos tiros dentro del mismo frame regular no puede exceder 10"
         );
     }
 }

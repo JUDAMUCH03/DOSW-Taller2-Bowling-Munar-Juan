@@ -1,4 +1,4 @@
-
+package edu.eci.dosw.bowling;
 import java.util.List;
 
 public class BowlingScorer {
