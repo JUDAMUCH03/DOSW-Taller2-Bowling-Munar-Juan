@@ -63,4 +63,21 @@ class BowlingGameTest {
             "La suma de dos tiros dentro del mismo frame regular no puede exceder 10"
         );
     }
+
+    @Test
+    @DisplayName("A5: roll() cuando el juego ya esta completo debe lanzar IllegalStateException")
+    void rollWhenGameIsComplete_throwsIllegalStateException() {
+        // Arrange: Se juegan 20 tiros de 0 pinos (10 frames completos de 2 tiros cada uno)
+        BowlingGame game = new BowlingGame();
+        for (int i = 0; i < 20; i++) {
+            game.roll(0);
+        }
+
+        // Act & Assert: El tiro 21 debe ser rechazado por juego terminado
+        assertThrows(
+            IllegalStateException.class,
+            () -> game.roll(0),
+            "No se pueden registrar mas tiros si el juego ya termino"
+        );
+    }
 }
