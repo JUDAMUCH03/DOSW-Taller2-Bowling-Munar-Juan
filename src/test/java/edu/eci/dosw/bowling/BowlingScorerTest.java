@@ -34,4 +34,22 @@ class BowlingScorerTest {
         // Act y Assert
         assertEquals(20, game.score(), "20 tiros de 1 pino deben sumar 20 puntos");
     }
+
+    @Test
+    @DisplayName("B3: Spare en frame 1 suma 10 mas el primer tiro del frame 2")
+    void spareInFirstFrame_addsNextRollBonus() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+        // Frame 1: Spare (5 + 5)
+        game.roll(5);
+        game.roll(5);
+        // Frame 2: primer tiro 3, segundo tiro 0
+        game.roll(3);
+        game.roll(0);
+        // Frames 3 al 10: 16 tiros a 0 para completar los 10 frames
+        rollMany(game, 16, 0);
+
+        // Act & Assert: Frame 1 (13) + Frame 2 (3) = 16
+        assertEquals(16, game.score(), "El spare debe bonificar el primer tiro del frame siguiente (13 + 3 = 16)");
+    }
 }
