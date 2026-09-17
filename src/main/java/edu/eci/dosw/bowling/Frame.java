@@ -1,4 +1,5 @@
 package edu.eci.dosw.bowling;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +15,17 @@ public class Frame {
     }
 
     public int getPinsRolled() {
-        int sum = 0;
-        for (int roll : rolls) {
-            sum += roll;
+        return rolls.stream().mapToInt(Integer::intValue).sum();
+    }
+
+    public FrameType getType() {
+        if (!rolls.isEmpty() && rolls.get(0) == 10) {
+            return FrameType.STRIKE;
         }
-        return sum;
+        return FrameType.NORMAL;
     }
 
     public boolean isComplete() {
-        return rolls.size() == 2 || (!rolls.isEmpty() && rolls.get(0) == 10);
+        return getType() == FrameType.STRIKE || rolls.size() == 2;
     }
 }
