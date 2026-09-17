@@ -3,6 +3,7 @@ package edu.eci.dosw.bowling;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BowlingScorerTest {
 
@@ -49,7 +50,7 @@ class BowlingScorerTest {
         // Frames 3 al 10: 16 tiros a 0 para completar los 10 frames
         rollMany(game, 16, 0);
 
-        // Act & Assert: Frame 1 (13) + Frame 2 (3) = 16
+        // Act y Assert
         assertEquals(16, game.score(), "El spare debe bonificar el primer tiro del frame siguiente (13 + 3 = 16)");
     }
 
@@ -63,7 +64,7 @@ class BowlingScorerTest {
         game.roll(3);  // Frame 2: tiro 2
         rollMany(game, 16, 0); // Frames 3 al 10
 
-        // Act & Assert: Frame 1 (17) + Frame 2 (7) = 24
+        // Act y Assert
         assertEquals(24, game.score(), "Frame 1 (17) + Frame 2 (7) debe dar 24");
     }
 
@@ -78,7 +79,7 @@ class BowlingScorerTest {
         game.roll(0);  // Frame 3: tiro 2
         rollMany(game, 14, 0); // Frames 4 al 10
 
-        // Act & Assert
+        // Act y Assert
         assertEquals(45, game.score(), "Dos strikes consecutivos deben totalizar 45 puntos");
     }
 
@@ -122,5 +123,21 @@ class BowlingScorerTest {
 
         // Assert
         assertEquals(300, game.score(), "12 strikes consecutivos deben totalizar 300 puntos");
+    }
+
+    @Test
+    @DisplayName("B8: score() antes de completar el juego lanza IllegalStateException")
+    void scoreBeforeGameIsComplete_throwsIllegalStateException() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+        game.roll(4);
+        game.roll(3);
+
+        // Act y Assert
+        assertThrows(
+            IllegalStateException.class,
+            () -> game.score(),
+            "No se puede consultar el score final si el juego no esta completo"
+        );
     }
 }
