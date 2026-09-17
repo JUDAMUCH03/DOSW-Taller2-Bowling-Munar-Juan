@@ -194,4 +194,24 @@ class BowlingGameTest {
         game.roll(5);
         assertTrue(game.isComplete(), "El frame 10 con spare debe completarse tras el 3er tiro");
     }
+
+    @Test
+    @DisplayName("C5: Frame 10 con strike requiere exactamente 3 tiros para completarse")
+    void tenthFrameWithStrike_isCompleteOnlyAfterThreeRolls() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+        rollMany(game, 18, 0);
+
+        // Act y Assert: Tiro 1 (Strike)
+        game.roll(10);
+        assertFalse(game.isComplete(), "No debe completarse con solo 1 tiro en el frame 10 con strike");
+
+        // Act y Assert: Tiro 2 (Primer bono)
+        game.roll(10);
+        assertFalse(game.isComplete(), "No debe completarse con 2 tiros en el frame 10 con strike");
+
+        // Act y Assert: Tiro 3 (Segundo bono)
+        game.roll(10);
+        assertTrue(game.isComplete(), "El frame 10 con strike debe completarse exactamente con 3 tiros");
+    }
 }
