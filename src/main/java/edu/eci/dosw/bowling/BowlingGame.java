@@ -1,4 +1,5 @@
 package edu.eci.dosw.bowling;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,28 +17,33 @@ public class BowlingGame {
         this.currentFrame = 0;
     }
 
-    /** 
-     * Registra pinos derribados. Lanza IllegalArgumentException si pines < 0 o > 10.
-     * Lanza IllegalStateException si el juego ya termino. 
-     */
     public void roll(int pins) {
         if (pins < 0 || pins > 10) {
             throw new IllegalArgumentException("Numero de pinos invalido: " + pins + ". Debe estar entre 0 y 10.");
         }
 
-        if (frames.isEmpty()) {
-            Frame frame = new Frame();
-            frame.addRoll(pins);
-            frames.add(frame);
+        Frame activeFrame = getOrCreateActiveFrame();
+
+        if (activeFrame.getPinsRolled() + pins > 10) {
+            throw new IllegalArgumentException("La suma de pinos en el frame no puede superar 10");
         }
+
+        activeFrame.addRoll(pins);
     }
 
-    /** Puntaje total. Lanza IllegalStateException si el juego no esta completo. */
+    private Frame getOrCreateActiveFrame() {
+        if (frames.isEmpty() || frames.get(frames.size() - 1).isComplete()) {
+            Frame newFrame = new Frame();
+            frames.add(newFrame);
+            return newFrame;
+        }
+        return frames.get(frames.size() - 1);
+    }
+
     public int score() {
         return 0;
     }
 
-    /** true cuando los 10 frames han sido completados. */
     public boolean isComplete() {
         return false;
     }
