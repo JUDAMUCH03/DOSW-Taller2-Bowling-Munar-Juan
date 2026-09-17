@@ -214,4 +214,21 @@ class BowlingGameTest {
         game.roll(10);
         assertTrue(game.isComplete(), "El frame 10 con strike debe completarse exactamente con 3 tiros");
     }
+
+    @Test
+    @DisplayName("C6: Juego perfecto tras el 12º strike reporta isComplete true")
+    void perfectGame_afterTwelveStrikes_isComplete() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+
+        // Act: 12 strikes consecutivos
+        for (int i = 0; i < 12; i++) {
+            game.roll(10);
+        }
+
+        // Assert
+        assertTrue(game.isComplete(), "Un juego perfecto con 12 strikes debe marcarse como completo");
+        assertEquals(10, game.getFrames().size(), "El juego debe contener exactamente 10 frames");
+    }
+    
 }
