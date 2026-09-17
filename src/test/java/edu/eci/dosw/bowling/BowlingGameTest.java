@@ -18,7 +18,7 @@ class BowlingGameTest {
         // Arrange
         BowlingGame game = new BowlingGame();
 
-        // Act & Assert
+        // Act y Assert
         assertDoesNotThrow(() -> game.roll(0));
         assertFalse(game.getFrames().isEmpty(), "Debe existir al menos un frame creado");
         assertEquals(1, game.getFrames().size(), "Debe haber exactamente 1 frame tras el primer tiro");
@@ -59,7 +59,7 @@ class BowlingGameTest {
         BowlingGame game = new BowlingGame();
         game.roll(7);
 
-        // Act & Assert
+        // Act y Assert
         assertThrows(
             IllegalArgumentException.class,
             () -> game.roll(6),
@@ -230,5 +230,4 @@ class BowlingGameTest {
         assertTrue(game.isComplete(), "Un juego perfecto con 12 strikes debe marcarse como completo");
         assertEquals(10, game.getFrames().size(), "El juego debe contener exactamente 10 frames");
     }
-    
 }
