@@ -81,4 +81,26 @@ class BowlingScorerTest {
         // Act & Assert
         assertEquals(45, game.score(), "Dos strikes consecutivos deben totalizar 45 puntos");
     }
+
+    // Helper para jugar una partida completa de spares
+    private void rollAllSpares(BowlingGame game, int lastBonus) {
+        for (int i = 0; i < 10; i++) {
+            game.roll(5);
+            game.roll(5);
+        }
+        game.roll(lastBonus);
+    }
+
+    @Test
+    @DisplayName("B6: Todos spares mas ultimo tiro de 5 debe dar score 150")
+    void allSparesWithFiveBonus_scores150() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+
+        // Act
+        rollAllSpares(game, 5);
+
+        // Assert
+        assertEquals(150, game.score(), "Una partida de solo spares con bono final de 5 debe sumar 150");
+    }
 }
