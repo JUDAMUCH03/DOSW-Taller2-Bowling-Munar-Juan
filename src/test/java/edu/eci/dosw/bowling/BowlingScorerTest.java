@@ -66,4 +66,19 @@ class BowlingScorerTest {
         // Act & Assert: Frame 1 (17) + Frame 2 (7) = 24
         assertEquals(24, game.score(), "Frame 1 (17) + Frame 2 (7) debe dar 24");
     }
+
+    @Test
+    @DisplayName("B5: Dos strikes consecutivos suman bono con tiro de dos frames adelante")
+    void twoConsecutiveStrikes_scoresBonusCorrectly() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+        game.roll(10); // Frame 1: Strike
+        game.roll(10); // Frame 2: Strike
+        game.roll(5);  // Frame 3: tiro 1
+        game.roll(0);  // Frame 3: tiro 2
+        rollMany(game, 14, 0); // Frames 4 al 10
+
+        // Act & Assert
+        assertEquals(45, game.score(), "Dos strikes consecutivos deben totalizar 45 puntos");
+    }
 }
