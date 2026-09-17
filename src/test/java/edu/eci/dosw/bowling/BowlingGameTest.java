@@ -1,7 +1,7 @@
 package edu.eci.dosw.bowling;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -29,7 +29,7 @@ class BowlingGameTest {
         // Arrange
         BowlingGame game = new BowlingGame();
 
-        // Act & Assert
+        // Act y Assert
         assertThrows(
             IllegalArgumentException.class,
             () -> game.roll(-1),
@@ -43,7 +43,7 @@ class BowlingGameTest {
         // Arrange
         BowlingGame game = new BowlingGame();
 
-        // Act & Assert
+        // Act y Assert
         assertThrows(
             IllegalArgumentException.class,
             () -> game.roll(11),
@@ -73,7 +73,7 @@ class BowlingGameTest {
         BowlingGame game = new BowlingGame();
         rollMany(game, 20, 0);
 
-        // Act & Assert
+        // Act y Assert
         assertThrows(
             IllegalStateException.class,
             () -> game.roll(0),
