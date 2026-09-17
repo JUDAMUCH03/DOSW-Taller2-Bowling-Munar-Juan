@@ -122,4 +122,26 @@ class BowlingGameTest {
         assertEquals(FrameType.SPARE, frames.get(0).getType(), "El frame debe ser SPARE");
 
     }
+
+    @Test
+    @DisplayName("A8: Frame 10 con strike acepta hasta 3 tiros sin lanzar excepcion")
+    void tenthFrameWithStrike_acceptsUpToThreeRolls() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+        rollMany(game, 18, 0);
+
+        // Act
+        assertDoesNotThrow(() -> {
+            game.roll(10);
+            game.roll(10);
+            game.roll(10);
+        }, "El frame 10 con strike debe permitir hasta 3 tiros");
+
+        //Assert
+        List<Frame> frames = game.getFrames();
+        assertEquals(10, frames.size(), "El juego debe tener exactamente 10 frames");
+        Frame tenthFrame = frames.get(9);
+        assertEquals(3, tenthFrame.getRolls().size(), "El frame 10 debe almacenar los 3 tiros de bonificacion");
+        assertEquals(FrameType.TENTH, tenthFrame.getType(), "El ultimo frame debe identificarse como TENTH");
+    }
 }
