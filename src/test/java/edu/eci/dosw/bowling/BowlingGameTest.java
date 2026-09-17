@@ -178,4 +178,20 @@ class BowlingGameTest {
         assertEquals(10, game.getFrames().size(), "Deben existir 10 frames");
         assertTrue(game.isComplete(), "El juego debe marcarse completo al finalizar los 10 frames regulares");
     }
+
+    @Test
+    @DisplayName("C4: Frame 10 con spare solo se completa tras el tercer tiro")
+    void tenthFrameWithSpare_isCompleteOnlyAfterBonusRoll() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+        rollMany(game, 18, 0);
+
+        // Act y Assert
+        game.roll(7);
+        game.roll(3);
+        assertFalse(game.isComplete(), "El frame 10 con spare no debe completarse con 2 tiros");
+
+        game.roll(5);
+        assertTrue(game.isComplete(), "El frame 10 con spare debe completarse tras el 3er tiro");
+    }
 }
