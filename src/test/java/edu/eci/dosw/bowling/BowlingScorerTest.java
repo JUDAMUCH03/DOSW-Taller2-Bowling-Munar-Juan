@@ -103,4 +103,24 @@ class BowlingScorerTest {
         // Assert
         assertEquals(150, game.score(), "Una partida de solo spares con bono final de 5 debe sumar 150");
     }
+
+    // Helper para simular un juego perfecto (12 strikes)
+    private void rollPerfectGame(BowlingGame game) {
+        for (int i = 0; i < 12; i++) {
+            game.roll(10);
+        }
+    }
+
+    @Test
+    @DisplayName("B7: Juego perfecto - 12 strikes - score debe ser 300")
+    void perfectGame_scores300() {
+        // Arrange
+        BowlingGame game = new BowlingGame();
+
+        // Act
+        rollPerfectGame(game);
+
+        // Assert
+        assertEquals(300, game.score(), "12 strikes consecutivos deben totalizar 300 puntos");
+    }
 }
