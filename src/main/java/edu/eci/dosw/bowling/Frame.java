@@ -22,6 +22,9 @@ public class Frame {
         if (!rolls.isEmpty() && rolls.get(0) == 10) {
             return FrameType.STRIKE;
         }
+        if (rolls.size() == 2 && getPinsRolled() == 10) {
+            return FrameType.SPARE;
+        }
         return FrameType.NORMAL;
     }
 
