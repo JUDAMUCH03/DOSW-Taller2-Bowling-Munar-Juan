@@ -90,7 +90,7 @@ El aumento significativo en la cobertura de instrucciones y ramas condicionales 
 El ciclo de desarrollo se administró mediante ramas temáticas bajo el flujo de trabajo GitFlow, aislando las características funcionales antes de integrarlas formalmente sobre la rama base del proyecto.
 
 - Pull Request Principal: Integración completa de motor de puntuación, pruebas unitarias TDD, JaCoCo y SonarQube.
-- Enlace al PR: Pull Request #1 (disponible en la pestaña de Pull Requests del repositorio GitHub).
+- Enlace al PR: https://github.com/JUDAMUCH03/DOSW-Taller2-Bowling-Munar-Juan/pull/1
 - Rama Origen: `feature/MunarJuan_bowling`
 - Rama Destino: `develop`
 - Fecha de Merge: 17 de Septiembre de 2026.
