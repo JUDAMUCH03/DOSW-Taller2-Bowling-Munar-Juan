@@ -134,10 +134,7 @@ class BowlingScorerTest {
         game.roll(3);
 
         // Act y Assert
-        assertThrows(
-            IllegalStateException.class,
-            () -> game.score(),
-            "No se puede consultar el score final si el juego no esta completo"
+        assertThrows(IllegalStateException.class,game::score,"No se puede consultar el score final si el juego no esta completo"
         );
     }
 }

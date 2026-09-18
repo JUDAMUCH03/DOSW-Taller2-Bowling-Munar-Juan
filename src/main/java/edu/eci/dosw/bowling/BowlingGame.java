@@ -11,12 +11,10 @@ public class BowlingGame {
 
     private static final int MAX_FRAMES = 10;
     private final List<Frame> frames;
-    private int currentFrame;
     private final BowlingScorer scorer = new BowlingScorer();
 
     public BowlingGame() {
         this.frames = new ArrayList<>();
-        this.currentFrame = 0;
     }
 
     public void roll(int pins) {
